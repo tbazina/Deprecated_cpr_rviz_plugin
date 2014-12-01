@@ -1,0 +1,11 @@
+<library path="lib/libcpr_rviz_plugin">
+<class name="cpr_rviz_plugin/Teleop"
+type="cpr_rviz_plugin::TeleopPanel"
+base_class_type="rviz::Panel">
+<description>
+A panel widget to operate the CPR Mover robots.
+</description>
+</class>
+</library>
+
+
