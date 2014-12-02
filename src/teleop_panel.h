@@ -44,42 +44,56 @@ namespace cpr_rviz_plugin
 class TeleopPanel: public rviz::Panel
 {
 	Q_OBJECT
-	public:
+public:
 	TeleopPanel( QWidget* parent = 0 );
 
-	public Q_SLOTS:
-
+public Q_SLOTS:
     void setJogVel();
+    void initGUI();
+    void initROS();
 
-    void init();
-
-	protected Q_SLOTS:
+protected Q_SLOTS:
     void sendVel();
     void btPressedConnect();
     void btPressedReset();
     void btPressedEnable();
-    void btPressedGripper();
+    void btPressedGripperOpen();
+    void btPressedGripperClose();
+    void btPressedOverrideMinus();
+    void btPressedOverridePlus();
     void sendCommand();
 
 
 protected:
 	
 
-    bool gripperState;
+    bool flagMover4;	// which robot to operate?
+    bool flagMover6;
 
+    int override_value;
 
+    QTimer* output_timer;
+
+    QLabel* labelOverride;
     QLabel* labelStatus;
 
     QLabel* labelJ0;
     QLabel* labelJ1;
     QLabel* labelJ2;
     QLabel* labelJ3;
+    QLabel* labelJ4;
+    QLabel* labelJ5;
 
 
     QPushButton* buttonConnect;
     QPushButton* buttonReset;
     QPushButton* buttonEnable;
-    QPushButton* buttonGripper;
+
+    QPushButton* buttonOverridePlus;
+    QPushButton* buttonOverrideMinus;
+
+    QPushButton* buttonGripperOpen;
+    QPushButton* buttonGripperClose;
 
     QPushButton* buttonJog0Plus;
     QPushButton* buttonJog0Minus;
@@ -89,6 +103,11 @@ protected:
     QPushButton* buttonJog2Minus;
     QPushButton* buttonJog3Plus;
     QPushButton* buttonJog3Minus;
+
+    QPushButton* buttonJog4Plus;
+    QPushButton* buttonJog4Minus;
+    QPushButton* buttonJog5Plus;
+    QPushButton* buttonJog5Minus;
 
 
     // The ROS publisher/subscriber
