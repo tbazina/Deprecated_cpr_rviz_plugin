@@ -67,9 +67,9 @@
 <link name="Body2Oben">
     <visual>
       <geometry>
-	<cylinder length="0.13" radius="0.05"/>
+	<cylinder length="0.01" radius="0.05"/>
       </geometry>
-      <origin rpy="1.552 0 0" xyz="0 0.01 0.19"/>
+      <origin rpy="1.552 0 0" xyz="0 0.07 0.19"/>
       <material name="white">
         <color rgba="1 1 1 0.9"/>
       </material>
@@ -93,15 +93,30 @@
 <link name="Body3">
     <visual>
       <geometry>
-	<cylinder length="0.01" radius="0.05"/>
+	<cylinder length="0.13" radius="0.05"/>
       </geometry>
-      <origin rpy="1.552 0 0" xyz="0 -0.07 0"/>
+      <origin rpy="1.552 0 0" xyz="0 -0.0 0"/>
       <material name="white">
         <color rgba="1 1 1 0.9"/>
       </material>
     </visual>
   </link>
-
+<link name="Body3TopBox">
+    <visual>
+      <geometry>
+	<box size="0.1 0.07 0.04"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <material name="white">
+        <color rgba="1 1 1 0.0"/>
+      </material>
+    </visual>
+  </link>
+<joint name="A3basetoA3TopBoxfixed" type="fixed">
+    <parent link="Body3"/>
+    <child link="Body3TopBox"/>
+    <origin xyz="0 0 0"/>
+  </joint>
  
 <link name="Body4">
     <visual>
@@ -114,17 +129,7 @@
       </material>
     </visual>
   </link>
-<link name="Body4Back">
-    <visual>
-      <geometry>
-	<box size="0.1 0.07 0.04"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="white">
-        <color rgba="1 1 1 0.9"/>
-      </material>
-    </visual>
-  </link>
+
 <link name="Body4Front">
     <visual>
       <geometry>
@@ -136,11 +141,6 @@
       </material>
     </visual>
   </link>
-<joint name="A4basetoA4Backfixed" type="fixed">
-    <parent link="Body4"/>
-    <child link="Body4Back"/>
-    <origin xyz="0 0 0"/>
-  </joint>
   <joint name="A4basetoA4fixed" type="fixed">
     <parent link="Body4"/>
     <child link="Body4Front"/>
