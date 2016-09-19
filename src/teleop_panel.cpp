@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2014, Commonplace Robotics GmbH
+* Copyright (c) 2016, Commonplace Robotics GmbH
 * All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@
 // based on the RViz teleop panel tutorial, thank you!.
 
 // First version: November 1st, 2014
-// Current versin: December 2nd, 2014
+// Current versin: September 19th, 2016
 // 
 // RViz plugin to operate the Mover4 or Mover6 robot arms
 // Which robot to use is defined in the launch file:
@@ -88,13 +88,10 @@ TeleopPanel::TeleopPanel( QWidget* parent )
         ROS_INFO("no robot name found");
     }
 
-
     initGUI();
     initROS();
 
     output_timer->start( 100 );     // Start the timer.
-
-
 }
 
 
@@ -119,7 +116,7 @@ void TeleopPanel::initROS()
 
 
 //*************************************************************************************
-// receive joint velocity commands
+// receive joint state messages
 void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     float r2d = 180.0 / 3.141;
     labelJ0->setText(QString::number( (int)(r2d * msg->position[0]) ));
@@ -131,6 +128,9 @@ void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& ms
         labelJ4->setText(QString::number( (int)(r2d * msg->position[4]) ));
         labelJ5->setText(QString::number( (int)(r2d * msg->position[5]) ));
     }
+    
+    // The joint state messages are 8 joints long, 6 robot joints (Joint0 .. Joint5) and 2 gripper joints (Gripper1, Gripper2)
+    // the gripper joints are not shown here, but only used by RViz
 
 }
 
@@ -243,7 +243,6 @@ void TeleopPanel::sendVel()
             else jointVelocities[5] = 0.0;
 
         }
-
 
         for(int i=0; i<6; i++)
             velMsg.velocity[i] = jointVelocities[i];
@@ -386,9 +385,7 @@ void TeleopPanel::initGUI()
         layout->addLayout(hboxJ5);
     }
 
-
     setLayout( layout );
-
 
     // Create a timer for sending the output.
     output_timer = new QTimer( this );
@@ -403,7 +400,6 @@ void TeleopPanel::initGUI()
     connect( output_timer, SIGNAL( timeout() ), this, SLOT( sendVel() ));
 
 }
-
 
 
 

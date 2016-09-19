@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro"
-	name="CPRMover6">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="CPRMover6">
 
 <!-- URDF file for the Commonplace Robotics Mover6 robot arm, version 2016 -->
+<!-- Version 1.2 from Sept. 19th, 2016. Gripper joints added. -->
   
   <link name="base_link">
     <visual>
@@ -239,20 +239,26 @@
     <joint_properties damping="0.0" friction="0.0"/>
   </joint>
 
-<joint name="Gripper1" type="fixed">
+<joint name="GripperFixed" type="fixed">
     <parent link="geoJoint6"/>
     <child link="gripperBody"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
-<joint name="Gripper2" type="fixed">
+<joint name="Gripper1" type="continuous">
+    <axis xyz="1 0 0"/>
     <parent link="gripperBody"/>
     <child link="gripperFinger1"/>
     <origin rpy="0 0 3.141" xyz="0.0 0.01 0.03"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
   </joint>
-<joint name="Gripper3" type="fixed">
+<joint name="Gripper2" type="continuous">
+    <axis xyz="1 0 0"/>
     <parent link="gripperBody"/>
     <child link="gripperFinger2"/>
-    <origin rpy="0 0 0" xyz="0.0 -0.01 0.03"/>
+     <origin rpy="0 0 0" xyz="0.0 -0.01 0.03"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
   </joint>
 
  
