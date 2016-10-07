@@ -1,0 +1,14 @@
+<launch>
+	<param name="robot_type" value="mover6"/>
+	<param name="robot_description" textfile="$(find cpr_rviz_plugin)/CPRSRA.urdf.xacro" />
+
+	<param name="use_gui" value="True"/>
+	<!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node-->
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find cpr_rviz_plugin)/cpr_SRA.rviz" />
+
+	
+</launch>
+
