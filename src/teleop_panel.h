@@ -124,6 +124,7 @@ protected:
 	
 
     float jointVelocities[6];
+    QString lastError;
 
 	
 };

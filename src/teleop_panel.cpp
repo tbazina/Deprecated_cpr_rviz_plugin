@@ -62,6 +62,8 @@ TeleopPanel::TeleopPanel( QWidget* parent )
 : rviz::Panel( parent )
 {
 
+	ROS_INFO("CPR RViz Panel V01.3 October 7th, 2016");
+
     flagMover4 = true;      // default choice
     flagMover6 = false;
     override_value = 40;    // Value in percent
@@ -139,9 +141,12 @@ void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& ms
 // Here we receive the discrete commands like Connect, Reset, Enable
 // the commands are forwarded to the interface class
 void TeleopPanel::errorStateCallback(const std_msgs::String::ConstPtr& msg){
-    ROS_INFO("ErrorState: %s ", msg->data.c_str()) ;
-    QString rec = msg->data.c_str();
+	QString rec = msg->data.c_str();
     labelStatus->setText(rec);
+    if(rec != lastError){
+    	ROS_INFO("New ErrorState: %s ", msg->data.c_str()) ;
+    }
+	lastError = rec;
 }
 
 //********************************************************
