@@ -30,7 +30,7 @@
 // based on the RViz teleop panel tutorial, thank you!.
 
 // First version: November 1st, 2014
-// Current versin: September 19th, 2016
+// Current versin: Nov. 11th, 2016
 // 
 // RViz plugin to operate the Mover4 or Mover6 robot arms
 // Which robot to use is defined in the launch file:
@@ -62,7 +62,7 @@ TeleopPanel::TeleopPanel( QWidget* parent )
 : rviz::Panel( parent )
 {
 
-	ROS_INFO("CPR RViz Panel V01.3 October 7th, 2016");
+	ROS_INFO("CPR RViz Panel V01.5 Nov. 11th, 2016");
 
     flagMover4 = true;      // default choice
     flagMover6 = false;
@@ -131,7 +131,7 @@ void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& ms
         labelJ5->setText(QString::number( (int)(r2d * msg->position[5]) ));
     }
     
-    // The joint state messages are 8 joints long, 6 robot joints (Joint0 .. Joint5) and 2 gripper joints (Gripper1, Gripper2)
+    // The joint state messages are 6 (Mover4) resp. 8 (Mover6) joints long, 4 resp. 6 robot joints (Joint0 .. Joint5) and 2 gripper joints (Gripper1, Gripper2)
     // the gripper joints are not shown here, but only used by RViz
 
 }
