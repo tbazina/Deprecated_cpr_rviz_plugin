@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <name>cpr_rviz_plugin</name>
-  <version>0.0.0</version>
-  <description>The cpr_rviz_plugin package</description>
+  <version>1.0.0</version>
+  <description>Plugin that allows to operate the CPR Mover robots from RViz</description>
 
-  <maintainer email="dinko@todo.todo">dinko</maintainer>
+  <maintainer email="dinko.metalac@gmail.com">Dinko Osmankovic</maintainer>
 
-  <license>TODO</license>
+  <license>BSD</license>
 
 
 
