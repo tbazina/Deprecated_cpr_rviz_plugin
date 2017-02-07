@@ -6,8 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /CPR_Mover61
-        - /CPR_Mover61/Links1
+        - /CPR_SRA1
+        - /CPR_SRA1/Links1
       Splitter Ratio: 0.5
     Tree Height: 212
   - Class: rviz/Selection
@@ -112,7 +112,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-      Name: CPR_Mover6
+      Name: CPR_SRA1000HD
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0

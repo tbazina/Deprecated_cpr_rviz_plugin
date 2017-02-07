@@ -31,7 +31,6 @@
 
 // First version: November 1st, 2014
 // Current versin: Nov. 11th, 2016
-//
 // RViz plugin to operate the Mover4 or Mover6 robot arms
 // Which robot to use is defined in the launch file:
 // <param name="robot_type" value="mover4"/> or
@@ -130,6 +129,9 @@ void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& ms
         labelJ4->setText(QString::number( (int)(r2d * msg->position[4]) ));
         labelJ5->setText(QString::number( (int)(r2d * msg->position[5]) ));
     }
+    
+    // The joint state messages are 6 (Mover4) resp. 8 (Mover6) joints long, 4 resp. 6 robot joints (Joint0 .. Joint5) and 2 gripper joints (Gripper1, Gripper2)
+    // the gripper joints are not shown here, but only used by RViz
 
     // The joint state messages are 6 (Mover4) resp. 8 (Mover6) joints long, 4 resp. 6 robot joints (Joint0 .. Joint5) and 2 gripper joints (Gripper1, Gripper2)
     // the gripper joints are not shown here, but only used by RViz
