@@ -29,10 +29,12 @@
 
 #ifndef TELEOP_PANEL_H
 #define TELEOP_PANEL_H
+#ifndef Q_MOC_RUN
 #include <ros/ros.h>
 #include <rviz/panel.h>
 #include <sensor_msgs/JointState.h>
 #include <std_msgs/String.h>
+#endif
 
 class QLabel;
 class QLineEdit;
@@ -124,6 +126,7 @@ protected:
 	
 
     float jointVelocities[6];
+    QString lastError;
 
 	
 };

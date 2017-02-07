@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2014, Commonplace Robotics GmbH
+* Copyright (c) 2016, Commonplace Robotics GmbH
 * All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
@@ -30,8 +30,8 @@
 // based on the RViz teleop panel tutorial, thank you!.
 
 // First version: November 1st, 2014
-// Current versin: December 2nd, 2014
-// 
+// Current versin: Nov. 11th, 2016
+//
 // RViz plugin to operate the Mover4 or Mover6 robot arms
 // Which robot to use is defined in the launch file:
 // <param name="robot_type" value="mover4"/> or
@@ -62,6 +62,8 @@ TeleopPanel::TeleopPanel( QWidget* parent )
 : rviz::Panel( parent )
 {
 
+	ROS_INFO("CPR RViz Panel V01.5 Nov. 11th, 2016");
+
     flagMover4 = true;      // default choice
     flagMover6 = false;
     override_value = 40;    // Value in percent
@@ -88,13 +90,10 @@ TeleopPanel::TeleopPanel( QWidget* parent )
         ROS_INFO("no robot name found");
     }
 
-
     initGUI();
     initROS();
 
     output_timer->start( 100 );     // Start the timer.
-
-
 }
 
 
@@ -119,7 +118,7 @@ void TeleopPanel::initROS()
 
 
 //*************************************************************************************
-// receive joint velocity commands
+// receive joint state messages
 void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     float r2d = 180.0 / 3.141;
     labelJ0->setText(QString::number( (int)(r2d * msg->position[0]) ));
@@ -132,6 +131,9 @@ void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& ms
         labelJ5->setText(QString::number( (int)(r2d * msg->position[5]) ));
     }
 
+    // The joint state messages are 6 (Mover4) resp. 8 (Mover6) joints long, 4 resp. 6 robot joints (Joint0 .. Joint5) and 2 gripper joints (Gripper1, Gripper2)
+    // the gripper joints are not shown here, but only used by RViz
+
 }
 
 
@@ -139,9 +141,12 @@ void TeleopPanel::jointStateCallback(const sensor_msgs::JointState::ConstPtr& ms
 // Here we receive the discrete commands like Connect, Reset, Enable
 // the commands are forwarded to the interface class
 void TeleopPanel::errorStateCallback(const std_msgs::String::ConstPtr& msg){
-    ROS_INFO("ErrorState: %s ", msg->data.c_str()) ;
-    QString rec = msg->data.c_str();
+	QString rec = msg->data.c_str();
     labelStatus->setText(rec);
+    if(rec != lastError){
+    	ROS_INFO("New ErrorState: %s ", msg->data.c_str()) ;
+    }
+	lastError = rec;
 }
 
 //********************************************************
@@ -243,7 +248,6 @@ void TeleopPanel::sendVel()
             else jointVelocities[5] = 0.0;
 
         }
-
 
         for(int i=0; i<6; i++)
             velMsg.velocity[i] = jointVelocities[i];
@@ -386,9 +390,7 @@ void TeleopPanel::initGUI()
         layout->addLayout(hboxJ5);
     }
 
-
     setLayout( layout );
-
 
     // Create a timer for sending the output.
     output_timer = new QTimer( this );
@@ -407,10 +409,9 @@ void TeleopPanel::initGUI()
 
 
 
-
 } // end namespace
 
-// Tell pluginlib about this class. 
+// Tell pluginlib about this class.
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS(cpr_rviz_plugin::TeleopPanel,rviz::Panel )
 // END_TUTORIAL
