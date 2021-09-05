@@ -153,36 +153,36 @@
 
 
 
-<joint name="Joint0" type="revolute">
+<joint name="Joint0" type="continuous">
     <axis xyz="0 0 1"/>
     <parent link="base_link"/>
     <child link="geoJoint1"/>
     <origin rpy="0 0 0" xyz="0 0 0.158"/>
-    <limit lower="-2.618" upper="2.618" effort="100" velocity="30"/>
+    <limit effort="100" velocity="30"/>
     <joint_properties damping="0.0" friction="0.0"/>
   </joint>
-<joint name="Joint1" type="revolute">
+<joint name="Joint1" type="continuous">
     <axis xyz="0 1 0"/>
     <parent link="geoJoint1"/>
     <child link="geoJoint2"/>
     <origin rpy="0 0 0" xyz="0 0 0.060"/>
-    <limit lower="-0.524" upper="1.047" effort="100" velocity="100"/>
+    <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
   </joint>
-<joint name="Joint2" type="revolute">
+<joint name="Joint2" type="continuous">
     <axis xyz="0 1 0"/>
     <parent link="geoJoint2"/>
     <child link="geoJoint3"/>
     <origin rpy="0 0 0" xyz="0 0 0.190"/>
-    <limit lower="-0.698" upper="2.443" effort="100" velocity="100"/>
+    <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
   </joint>
- <joint name="Joint3" type="revolute">
+ <joint name="Joint3" type="continuous">
     <axis xyz="0 1 0"/>
     <parent link="geoJoint3"/>
     <child link="geoJoint4"/>
     <origin rpy="0 0 0" xyz="0 0 0.220"/>
-    <limit lower="-2.269" upper="2.269" effort="100" velocity="100"/>
+    <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
   </joint>
 
